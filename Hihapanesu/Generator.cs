@@ -37,13 +37,16 @@ namespace Hihapanesu
 
 		public Geometry2D.Single.Size Feed { get; set; }
 
+		public Geometry2D.Single.Size Offset { get; set; }
+
 		Geometry2D.Single.Point position = new Geometry2D.Single.Point();
 		Xml.Dom.Element root = new Xml.Dom.Element("svg");
 
 		public Generator()
 		{
 			Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource("symbols.svg");
-			this.Feed = new Geometry2D.Single.Size(0, 64); //symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
+			this.Offset = new Geometry2D.Single.Size(10, 10);
+			this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
 			foreach (Xml.Dom.Node node in symbols.Root)
 				if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
 					this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
@@ -138,17 +141,26 @@ namespace Hihapanesu
 
 		public void Append(char consonant, char vowel)
 		{
+			Geometry2D.Single.Point translate = this.position * this.Feed + this.Offset;
 			this.root.Add(new Xml.Dom.Element("path", 
 			                                  KeyValue.Create("d", this[consonant, vowel]), 
-			                                  KeyValue.Create("transform", "translate(" + this.position.ToString() + ")")
+			                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
 			)
 			);
-			this.position += this.Feed;
+			this.Move();
 		}
 
 		public void AppendWhitespace()
 		{
-			this.position += this.Feed / 2;
+			this.Move();
+		}
+
+		void Move()
+		{
+			if (this.position.Y > 14)
+				this.position = new Geometry2D.Single.Point(this.position.X + 1, 0);
+			else
+				this.position += new Geometry2D.Single.Point(0, 1);
 		}
 
 		public bool Save(Uri.Locator resource)
