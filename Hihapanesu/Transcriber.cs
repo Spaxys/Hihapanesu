@@ -110,11 +110,28 @@ namespace Hihapanesu
 		{
 			LetterCategory lastCategory = LetterCategory.Whitespace;
 			System.Collections.Generic.IEnumerator<char> enumerator = input.GetEnumerator();
-
-			while (enumerator.MoveNext())
+			bool evenInsertVowel = false;
+			if (!enumerator.MoveNext())
+				yield break;
+			bool done = false;
+			while (!done)
 			{
-				char c = enumerator.Current;
-				char current = this.Map(c);
+				char current = enumerator.Current;
+				if (!enumerator.MoveNext())
+					done = true;
+				else if (current == enumerator.Current)
+					done = !enumerator.MoveNext();
+				else if (current == 'c' && enumerator.Current == 'k')
+				{
+					done = !enumerator.MoveNext();
+					current = 'k';
+				}
+				else if (current == 'c' && enumerator.Current == 'h')
+				{
+					done = !enumerator.MoveNext();
+					current = lastCategory == LetterCategory.Vowel ? 'k' : 's';
+				}
+				current = this.Map(current);
 				LetterCategory category = this.Categorize(current);
 				switch (category)
 				{
@@ -127,12 +144,13 @@ namespace Hihapanesu
 						break;
 					case LetterCategory.Consonant:
 						if (lastCategory == LetterCategory.Consonant)
-							yield return 'u';
+							yield return (evenInsertVowel = !evenInsertVowel) ? 'u' : 'i';
 						yield return current;
 						break;
 					case LetterCategory.Whitespace:
 						if (lastCategory == LetterCategory.Consonant)
-							yield return 'u';
+							yield return !evenInsertVowel ? 'u' : 'i';
+						evenInsertVowel = false;
 						if (lastCategory != LetterCategory.Whitespace)
 							yield return ' ';
 						break;
@@ -140,6 +158,8 @@ namespace Hihapanesu
 				if (category != LetterCategory.Other)
 					lastCategory = category;
 			}
+			if (lastCategory == LetterCategory.Consonant)
+				yield return (evenInsertVowel = !evenInsertVowel) ? 'u' : 'i';
 		}
 	}
 }

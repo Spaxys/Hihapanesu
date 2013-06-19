@@ -1,4 +1,5 @@
 using System;
+using Kean.Core.Extension;
 using Uri = Kean.Core.Uri;
 
 namespace Hihapanesu
@@ -7,9 +8,17 @@ namespace Hihapanesu
 	{
 		public static void Main(string[] args)
 		{
-			Transcriber t = new Transcriber();
+			string input = Console.ReadLine();
+			string transcribed = new Transcriber().Transcribe(input);
+
+			(input + "\n\n----------------------------------------------------------------------------\n\n" + transcribed).
+				Save("test.txt");
+
+			Console.WriteLine();
+			Console.WriteLine(transcribed);
+
 			Generator g = new Generator();
-			g.Append(t.Transcribe(Console.ReadLine()));
+			g.Append(transcribed);
 			g.Save(Uri.Locator.FromRelativePlatformPath("test.svg"));
 			System.Diagnostics.Process.Start("test.svg");
 		}
