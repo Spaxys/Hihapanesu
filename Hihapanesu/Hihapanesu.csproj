@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{05536DC0-7DDA-401C-9924-0EDDAD3F4B7B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Hihapanesu</RootNamespace>
+    <AssemblyName>Hihapanesu</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="Kean.Core">
+      <HintPath>..\packages\Kean.Core.0.2.0.920\lib\net40-Client\Kean.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Core.Error">
+      <HintPath>..\packages\Kean.Core.Error.0.2.0.920\lib\net40-Client\Kean.Core.Error.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Core.Collection">
+      <HintPath>..\packages\Kean.Core.Collection.0.2.0.920\lib\net40-Client\Kean.Core.Collection.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Core.Uri">
+      <HintPath>..\packages\Kean.Core.Uri.0.2.0.920\lib\net40-Client\Kean.Core.Uri.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.IO">
+      <HintPath>..\packages\Kean.IO.0.2.0.920\lib\net40-Client\Kean.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml">
+      <HintPath>..\packages\Kean.Xml.0.2.0.920\lib\net40-Client\Kean.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Sax">
+      <HintPath>..\packages\Kean.Xml.Sax.0.2.0.920\lib\net40-Client\Kean.Xml.Sax.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Dom">
+      <HintPath>..\packages\Kean.Xml.Dom.0.2.0.920\lib\net40-Client\Kean.Xml.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Math">
+      <HintPath>..\packages\Kean.Math.0.2.0.920\lib\net40-Client\Kean.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Math.Geometry2D">
+      <HintPath>..\packages\Kean.Math.Geometry2D.0.2.0.920\lib\net40-Client\Kean.Math.Geometry2D.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transcriber.cs" />
+    <Compile Include="LetterCategory.cs" />
+    <Compile Include="Generator.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="symbols.svg" />
+  </ItemGroup>
+</Project>
