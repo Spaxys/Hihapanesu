@@ -15,7 +15,7 @@ Global
 		{05536DC0-7DDA-401C-9924-0EDDAD3F4B7B}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Japanese\Japanese.csproj
+		StartupItem = Hihapanesu\Hihapanesu.csproj
 		Policies = $0
 		$0.DotNetNamingPolicy = $1
 		$1.DirectoryNamespaceAssociation = Flat
@@ -184,5 +184,12 @@ Global
 		$27.NamingStyle = PascalCase
 		$27.IncludeInstanceMembers = True
 		$27.IncludeStaticEntities = True
+		$0.VersionControlPolicy = $29
+		$29.inheritsSet = Mono
+		$0.ChangeLogPolicy = $30
+		$30.UpdateMode = None
+		$30.MessageStyle = $31
+		$31.LineAlign = 0
+		$30.inheritsSet = Mono
 	EndGlobalSection
 EndGlobal

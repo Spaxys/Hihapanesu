@@ -34,7 +34,7 @@ namespace Hihapanesu
 					result = 's';
 					break;
 				case 'å':
-					result = 'a';
+					result = 'o';
 					break;
 				case 'ä':
 					result = 'e';
@@ -109,9 +109,11 @@ namespace Hihapanesu
 		public System.Collections.Generic.IEnumerable<char> Transcribe(System.Collections.Generic.IEnumerable<char> input)
 		{
 			LetterCategory lastCategory = LetterCategory.Whitespace;
+			System.Collections.Generic.IEnumerator<char> enumerator = input.GetEnumerator();
 
-			foreach (char c in input)
+			while (enumerator.MoveNext())
 			{
+				char c = enumerator.Current;
 				char current = this.Map(c);
 				LetterCategory category = this.Categorize(current);
 				switch (category)
