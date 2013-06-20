@@ -39,13 +39,16 @@ namespace Hihapanesu
 
 		public Geometry2D.Single.Size Offset { get; set; }
 
+		public Geometry2D.Single.Size PageSize { get; set; }
+
 		Geometry2D.Single.Point position = new Geometry2D.Single.Point();
 		Xml.Dom.Element root = new Xml.Dom.Element("svg");
 
 		public Generator()
 		{
 			Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource("symbols.svg");
-			this.Offset = new Geometry2D.Single.Size(10, 10);
+			this.Offset = new Geometry2D.Single.Size(32, 32);
+			this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
 			this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
 			foreach (Xml.Dom.Node node in symbols.Root)
 				if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
@@ -147,20 +150,21 @@ namespace Hihapanesu
 			                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
 			)
 			);
-			this.Move();
+			this.Move(1.0f);
 		}
 
 		public void AppendWhitespace()
 		{
-			this.Move();
+			if (this.position.Y != 0)
+				this.Move(0.5f);
 		}
 
-		void Move()
+		void Move(float distance)
 		{
-			if (this.position.Y > 14)
+			this.position += new Geometry2D.Single.Point(0, distance);
+			Geometry2D.Single.Point totalSize = this.position * this.Feed + this.Feed + 2 * this.Offset;
+			if (totalSize.Y >= this.PageSize.Height)
 				this.position = new Geometry2D.Single.Point(this.position.X + 1, 0);
-			else
-				this.position += new Geometry2D.Single.Point(0, 1);
 		}
 
 		public bool Save(Uri.Locator resource)
