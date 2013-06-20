@@ -8,19 +8,32 @@ namespace Hihapanesu
 	{
 		public static void Main(string[] args)
 		{
-			string input = Console.ReadLine();
-			string transcribed = new Transcriber().Transcribe(input);
-
-			(input + "\n\n----------------------------------------------------------------------------\n\n" + transcribed).
-				Save("test.txt");
-
-			Console.WriteLine();
-			Console.WriteLine(transcribed);
-
-			Generator g = new Generator();
-			g.Append(transcribed);
-			g.Save(Uri.Locator.FromRelativePlatformPath("test.svg"));
-			System.Diagnostics.Process.Start("test.svg");
+			if (args.Length > 0)
+				foreach (string filename in args)
+				{
+					Console.Write(filename);
+					string input = System.IO.File.ReadAllText(filename);
+					Console.Write(".");
+					string transcribed = new Transcriber().Transcribe(input);
+					Console.Write(".");
+					transcribed.Save(System.IO.Path.GetFileNameWithoutExtension(filename) + ".jp.txt");
+					Console.Write(".");
+					Generator g = new Generator();
+					g.Append(transcribed);
+					Console.Write(".");
+					g.Save(Uri.Locator.FromRelativePlatformPath(System.IO.Path.GetFileNameWithoutExtension(filename) + ".svg"));
+					Console.WriteLine("done");
+				}
+			else
+			{
+				string input = Console.ReadLine();
+				string transcribed = new Transcriber().Transcribe(input);
+				Console.WriteLine();
+				Console.WriteLine(transcribed);
+				Generator g = new Generator();
+				g.Append(transcribed);
+				g.Save(Uri.Locator.FromRelativePlatformPath("test.svg"));
+			}
 		}
 	}
 }
