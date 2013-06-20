@@ -49,6 +49,8 @@ namespace Hihapanesu
 			Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource("symbols.svg");
 			this.Offset = new Geometry2D.Single.Size(32, 32);
 			this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
+			this.root.AddAttribute("width", this.PageSize.Width.AsString());
+			this.root.AddAttribute("height", this.PageSize.Height.AsString());
 			this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
 			foreach (Xml.Dom.Node node in symbols.Root)
 				if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
