@@ -41,20 +41,32 @@ namespace Hihapanesu
 
 		public Geometry2D.Single.Size PageSize { get; set; }
 
-		Geometry2D.Single.Point position = new Geometry2D.Single.Point();
-		Xml.Dom.Element root = new Xml.Dom.Element("svg");
+		public bool Help { get; set; }
+
+		Geometry2D.Single.Point position;
+		Xml.Dom.Element root;
 
 		public Generator()
 		{
 			Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource("symbols.svg");
 			this.Offset = new Geometry2D.Single.Size(32, 32);
 			this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
-			this.root.AddAttribute("width", this.PageSize.Width.AsString());
-			this.root.AddAttribute("height", this.PageSize.Height.AsString());
 			this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
 			foreach (Xml.Dom.Node node in symbols.Root)
 				if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
 					this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+			this.ResetPage();
+		}
+
+		bool ResetPage()
+		{
+			this.position = new Geometry2D.Single.Point();
+			this.root = new Xml.Dom.Element("svg",
+			                                KeyValue.Create("xmlns", "http://www.w3.org/2000/svg"),
+			                                KeyValue.Create("version", "1.1"),
+			                                KeyValue.Create("width", this.PageSize.Width.AsString()),
+			                                KeyValue.Create("height", this.PageSize.Height.AsString()));
+			return true;
 		}
 
 		public void Append(System.Collections.Generic.IEnumerable<char> input)
@@ -152,6 +164,14 @@ namespace Hihapanesu
 			                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
 			)
 			);
+			if (this.Help)
+				this.root.Add(new Xml.Dom.Element("text", 
+				                                  new Xml.Dom.Text(new string(new char[] { consonant, vowel })),
+				                                  KeyValue.Create("style", "text-anchor: right; font: Verdana 10pt"),
+				                                  KeyValue.Create("transform", "translate(" + (translate.X + this.Feed.Width - 10).AsString() + ", " + (translate.Y + this.Feed.Height / 2).AsString() + ")")
+				)
+				);
+
 			this.Move(1.0f);
 		}
 
@@ -171,7 +191,7 @@ namespace Hihapanesu
 
 		public bool Save(Uri.Locator resource)
 		{
-			return new Xml.Dom.Document(this.root).Save(resource);
+			return new Xml.Dom.Document(this.root).Save(resource) && this.ResetPage();
 		}
 	}
 }

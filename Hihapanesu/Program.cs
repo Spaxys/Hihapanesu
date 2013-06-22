@@ -8,17 +8,17 @@ namespace Hihapanesu
 	{
 		public static void Main(string[] args)
 		{
+			Generator g = new Generator();
 			if (args.Length > 0)
 				foreach (string filename in args)
 				{
 					Console.Write(filename);
-					string input = System.IO.File.ReadAllText(filename);
+					string input = System.IO.File.ReadAllText(filename).ToLower();
 					Console.Write(".");
 					string transcribed = new Transcriber().Transcribe(input);
 					Console.Write(".");
 					transcribed.Save(System.IO.Path.GetFileNameWithoutExtension(filename) + ".jp.txt");
 					Console.Write(".");
-					Generator g = new Generator();
 					g.Append(transcribed);
 					Console.Write(".");
 					g.Save(Uri.Locator.FromRelativePlatformPath(System.IO.Path.GetFileNameWithoutExtension(filename) + ".svg"));
@@ -26,11 +26,10 @@ namespace Hihapanesu
 				}
 			else
 			{
-				string input = Console.ReadLine();
+				string input = Console.ReadLine().ToLower();
 				string transcribed = new Transcriber().Transcribe(input);
 				Console.WriteLine();
 				Console.WriteLine(transcribed);
-				Generator g = new Generator();
 				g.Append(transcribed);
 				g.Save(Uri.Locator.FromRelativePlatformPath("test.svg"));
 			}
