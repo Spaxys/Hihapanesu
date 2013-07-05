@@ -164,7 +164,7 @@ namespace Hihapanesu
 			                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
 			)
 			);
-			if (this.Help)
+			if (true || this.Help)
 				this.root.Add(new Xml.Dom.Element("text", 
 				                                  new Xml.Dom.Text(new string(new char[] { consonant, vowel })),
 				                                  KeyValue.Create("style", "text-anchor: right; font: Verdana 10pt"),
