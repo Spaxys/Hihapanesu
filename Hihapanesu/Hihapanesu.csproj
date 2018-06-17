@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -30,36 +30,36 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
     <Reference Include="Kean.Core">
-      <HintPath>..\packages\Kean.Core.0.2.0.920\lib\net40-Client\Kean.Core.dll</HintPath>
+      <HintPath>..\..\..\lib\Kean\Core\Kean.Core\bin\Release\Kean.Core.dll</HintPath>
     </Reference>
     <Reference Include="Kean.Core.Error">
-      <HintPath>..\packages\Kean.Core.Error.0.2.0.920\lib\net40-Client\Kean.Core.Error.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Collection">
-      <HintPath>..\packages\Kean.Core.Collection.0.2.0.920\lib\net40-Client\Kean.Core.Collection.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Uri">
-      <HintPath>..\packages\Kean.Core.Uri.0.2.0.920\lib\net40-Client\Kean.Core.Uri.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.IO">
-      <HintPath>..\packages\Kean.IO.0.2.0.920\lib\net40-Client\Kean.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml">
-      <HintPath>..\packages\Kean.Xml.0.2.0.920\lib\net40-Client\Kean.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml.Sax">
-      <HintPath>..\packages\Kean.Xml.Sax.0.2.0.920\lib\net40-Client\Kean.Xml.Sax.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml.Dom">
-      <HintPath>..\packages\Kean.Xml.Dom.0.2.0.920\lib\net40-Client\Kean.Xml.Dom.dll</HintPath>
+      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Error\bin\Release\Kean.Core.Error.dll</HintPath>
     </Reference>
     <Reference Include="Kean.Math">
-      <HintPath>..\packages\Kean.Math.0.2.0.920\lib\net40-Client\Kean.Math.dll</HintPath>
+      <HintPath>..\..\..\lib\Kean\Math\Kean.Math.Geometry2D\bin\Release\Kean.Math.dll</HintPath>
     </Reference>
     <Reference Include="Kean.Math.Geometry2D">
-      <HintPath>..\packages\Kean.Math.Geometry2D.0.2.0.920\lib\net40-Client\Kean.Math.Geometry2D.dll</HintPath>
+      <HintPath>..\..\..\lib\Kean\Math\Kean.Math.Geometry2D\bin\Release\Kean.Math.Geometry2D.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Kean.Core.Collection">
+      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Collection\bin\Release\Kean.Core.Collection.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Core.Uri">
+      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Uri\bin\Release\Kean.Core.Uri.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.IO">
+      <HintPath>..\..\..\lib\Kean\IO\Kean.IO\bin\Release\Kean.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml">
+      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Sax">
+      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.Sax.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Dom">
+      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.Dom.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
