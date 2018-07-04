@@ -16,7 +16,7 @@ namespace Hihapanesu
 					Console.Write(filename);
 					string input = System.IO.File.ReadAllText(filename).ToLower();
 					Console.Write(".");
-					string transcribed = new Transcriber().Transcribe(input);
+					string transcribed = new HihapanesuTranscriber().Transcribe(input);
 					Console.Write(".");
 					transcribed.Save(System.IO.Path.GetFileNameWithoutExtension(filename) + ".jp.txt");
 					Console.Write(".");
