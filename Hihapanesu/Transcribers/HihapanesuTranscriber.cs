@@ -1,12 +1,13 @@
 using System;
+using Hihapanesu.Interfaces;
 using Kean.Core.Extension;
 using Collection = Kean.Core.Collection;
 
-namespace Hihapanesu
+namespace Hihapanesu.Transcribers
 {
-	public class Transcriber
+	public class HihapanesuTranscriber : ITranscriber
 	{
-		public Transcriber()
+		public HihapanesuTranscriber()
 		{
 		}
 

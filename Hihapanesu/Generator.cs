@@ -69,11 +69,19 @@ namespace Hihapanesu
 			return true;
 		}
 
+        /// <summary>
+        /// Takes an IEnumerable-char input, and calls Append(...) on each character, appending a child element for each character to a root xml document.
+        /// </summary>
+        /// <param name="input"></param>
 		public void Append(System.Collections.Generic.IEnumerable<char> input)
 		{
 			this.Append(input.GetEnumerator());
 		}
 
+        /// <summary>
+        /// Takes any character, or a whitespace, and calls the respective appropriate append method.
+        /// </summary>
+        /// <param name="input"></param>
 		public void Append(System.Collections.Generic.IEnumerator<char> input)
 		{
 			while (input.MoveNext())
@@ -86,6 +94,12 @@ namespace Hihapanesu
 			}
 		}
 
+        /// <summary>
+        /// Maps consonant and vocal character inputs to their respective int address output
+        /// </summary>
+        /// <param name="consonant"></param>
+        /// <param name="vowel"></param>
+        /// <returns></returns>
 		Tuple<int, int> Address(char consonant, char vowel)
 		{
 			int c = 0;
@@ -156,15 +170,23 @@ namespace Hihapanesu
 			return Tuple.Create(c, v);
 		}
 
+        /// <summary>
+        /// Appends a child element to the root xml document <para />
+        /// Always places a transcibed custom svg character, and optionally the free text beside it. 
+        /// </summary>
+        /// <param name="consonant"></param>
+        /// <param name="vowel"></param>
 		public void Append(char consonant, char vowel)
 		{
 			Geometry2D.Single.Point translate = this.position * this.Feed + this.Offset;
+            //Adds an xml child element with the transcribed character svg(?) to the root element
 			this.root.Add(new Xml.Dom.Element("path", 
 			                                  KeyValue.Create("d", this[consonant, vowel]), 
 			                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
 			)
 			);
 			if (true || this.Help)
+                //Adds an xml child text element to the root element. Just for testing purposes I guess, free text of the transcribed text I guess
 				this.root.Add(new Xml.Dom.Element("text", 
 				                                  new Xml.Dom.Text(new string(new char[] { consonant, vowel })),
 				                                  KeyValue.Create("style", "text-anchor: right; font: Verdana 10pt"),

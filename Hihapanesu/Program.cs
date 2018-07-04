@@ -1,4 +1,5 @@
 using System;
+using Hihapanesu.Transcribers;
 using Kean.Core.Extension;
 using Uri = Kean.Core.Uri;
 
@@ -27,7 +28,7 @@ namespace Hihapanesu
 			else
 			{
 				string input = Console.ReadLine().ToLower();
-				string transcribed = new Transcriber().Transcribe(input);
+				string transcribed = new HihapanesuTranscriber().Transcribe(input);
 				Console.WriteLine();
 				Console.WriteLine(transcribed);
 				g.Append(transcribed);

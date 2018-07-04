@@ -63,11 +63,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ITranscriber.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transcriber.cs" />
     <Compile Include="LetterCategory.cs" />
     <Compile Include="Generator.cs" />
+    <Compile Include="Transcribers\ElvishTranscriber.cs" />
+    <Compile Include="Transcribers\HihapanesuTranscriber.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
