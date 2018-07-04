@@ -30,37 +30,47 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kean.Core">
-      <HintPath>..\..\..\lib\Kean\Core\Kean.Core\bin\Release\Kean.Core.dll</HintPath>
+    <Reference Include="Kean.Core, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Kean.Core.Error">
-      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Error\bin\Release\Kean.Core.Error.dll</HintPath>
+    <Reference Include="Kean.Core.Collection, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Core.Collection.dll</HintPath>
     </Reference>
-    <Reference Include="Kean.Math">
-      <HintPath>..\..\..\lib\Kean\Math\Kean.Math.Geometry2D\bin\Release\Kean.Math.dll</HintPath>
+    <Reference Include="Kean.Core.Error, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Core.Error.dll</HintPath>
     </Reference>
-    <Reference Include="Kean.Math.Geometry2D">
-      <HintPath>..\..\..\lib\Kean\Math\Kean.Math.Geometry2D\bin\Release\Kean.Math.Geometry2D.dll</HintPath>
+    <Reference Include="Kean.Core.Uri, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Core.Uri.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.IO, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Math, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Math.Geometry2D, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Math.Geometry2D.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Xml.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Dom, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Xml.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="Kean.Xml.Sax, Version=0.2.0.948, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\lib\kean\Kean.Xml.Sax.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="Kean.Core.Collection">
-      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Collection\bin\Release\Kean.Core.Collection.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Core.Uri">
-      <HintPath>..\..\..\lib\Kean\Core\Kean.Core.Uri\bin\Release\Kean.Core.Uri.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.IO">
-      <HintPath>..\..\..\lib\Kean\IO\Kean.IO\bin\Release\Kean.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml">
-      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml.Sax">
-      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.Sax.dll</HintPath>
-    </Reference>
-    <Reference Include="Kean.Xml.Dom">
-      <HintPath>..\..\..\lib\Kean\Xml\Kean.Xml.Dom\bin\Release\Kean.Xml.Dom.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITranscriber.cs" />
