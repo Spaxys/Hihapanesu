@@ -6,13 +6,13 @@ using Xml = Kean.Xml;
 using Uri = Kean.Core.Uri;
 using Hihapanesu.Interfaces;
 
-namespace Hihapanesu
+namespace Hihapanesu.Generators
 {
-	public class Generator : IGenerator
+	public abstract class AbstractGenerator : IGenerator
     {
-		string[,] data = new string[14, 5];
+		protected string[,] data = new string[14, 5];
 
-		string this [char consonant, char vowel]
+		protected string this [char consonant, char vowel]
 		{
 			get
 			{ 
@@ -26,7 +26,7 @@ namespace Hihapanesu
 			}
 		}
 
-		string this [string key]
+		protected string this [string key]
 		{
 			get { return key.Length > 1 ? this[key[0], key[1]] : null; }
 			set
@@ -44,10 +44,10 @@ namespace Hihapanesu
 
 		public bool Help { get; set; }
 
-		Geometry2D.Single.Point position;
-		Xml.Dom.Element root;
+        protected Geometry2D.Single.Point position;
+		protected Xml.Dom.Element root;
 
-		public Generator()
+		public AbstractGenerator()
 		{
 			Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource("symbols.svg");
 			this.Offset = new Geometry2D.Single.Size(32, 32);
@@ -59,7 +59,19 @@ namespace Hihapanesu
 			this.ResetPage();
 		}
 
-		bool ResetPage()
+        public AbstractGenerator(string symbolsFileName)
+        {
+            Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource(symbolsFileName);
+            this.Offset = new Geometry2D.Single.Size(32, 32);
+            this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
+            this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
+            foreach (Xml.Dom.Node node in symbols.Root)
+                if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
+                    this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+            this.ResetPage();
+        }
+
+        protected bool ResetPage()
 		{
 			this.position = new Geometry2D.Single.Point();
 			this.root = new Xml.Dom.Element("svg",
@@ -101,7 +113,7 @@ namespace Hihapanesu
         /// <param name="consonant"></param>
         /// <param name="vowel"></param>
         /// <returns></returns>
-		Tuple<int, int> Address(char consonant, char vowel)
+		protected Tuple<int, int> Address(char consonant, char vowel)
 		{
 			int c = 0;
 			switch (consonant)
@@ -198,19 +210,9 @@ namespace Hihapanesu
 			this.Move(1.0f);
 		}
 
-		public void AppendWhitespace()
-		{
-			if (this.position.Y != 0)
-				this.Move(0.5f);
-		}
+        public abstract void AppendWhitespace();
 
-		void Move(float distance)
-		{
-			this.position += new Geometry2D.Single.Point(0, distance);
-			Geometry2D.Single.Point totalSize = this.position * this.Feed + this.Feed + 2 * this.Offset;
-			if (totalSize.Y >= this.PageSize.Height)
-				this.position = new Geometry2D.Single.Point(this.position.X + 1, 0);
-		}
+        protected abstract void Move(float distance);
 
 		public bool Save(Uri.Locator resource)
 		{
