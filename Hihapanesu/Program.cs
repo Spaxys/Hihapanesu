@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Hihapanesu.Generators;
 using Hihapanesu.Interfaces;
 using Hihapanesu.Transcribers;
@@ -15,11 +16,30 @@ namespace Hihapanesu
             ITranscriber t;
             if (args.Length > 0)
             {
-                g = new HihapanesuGenerator(); 
-                t = new HihapanesuTranscriber();
-                foreach (string filename in args)
+                if(args[0] == "-h")
                 {
-                    Console.Write(filename);
+                    g = new HihapanesuGenerator(); 
+                    t = new HihapanesuTranscriber();
+                }
+                else if(args[0] == "-e")
+                {
+                    g = new ElvishGenerator("symbols.svg", 12f, false); 
+                    t = new ElvishTranscriber();
+                }
+                else
+                {
+                    return;
+                }
+
+                //string[] fileArgs;
+                var fileArgs = args.GetEnumerator();
+                fileArgs.MoveNext();
+                Console.WriteLine(fileArgs.Current);
+
+                while(fileArgs.MoveNext())
+                {
+                    var filename = fileArgs.Current.ToString();
+                    Console.Write(fileArgs.Current);
                     string input = System.IO.File.ReadAllText(filename).ToLower();
                     Console.Write(".");
                     string transcribed = t.Transcribe(input);
