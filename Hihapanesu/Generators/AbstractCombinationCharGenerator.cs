@@ -153,6 +153,7 @@ namespace Hihapanesu.Generators
             LetterCategory previousCategory;
             char previous;
             char current = '\0';
+            var charactersToAppend = new List<string>();
             while (input.MoveNext())
             {
                 previous = current;
@@ -169,24 +170,38 @@ namespace Hihapanesu.Generators
                 }
                 else if(character.Length == 1)
                 {
-                    Append(character);
+                    charactersToAppend.Add(character);
+                    //Append(character);
                     character = "";
                     character += current;
                 }
                 else
                 {
-                    Append(character);
+                    charactersToAppend.Add(character);
+                    //Append(character);
                     character = "";
                 }
                 if (character.Length >= 2)
                 {
-                    Append(character);
+                    charactersToAppend.Add(character);
+                    //Append(character);
                     character = "";
                 }
             }
             if(character.Length > 0)
             {
-                Append(character);
+                    charactersToAppend.Add(character);
+                //Append(character);
+            }
+            //Add a newline if this word does not fit on this line
+            var currentPosition = this.position * this.Feed + this.Offset; 
+            if(currentPosition.X + this.Feed.Width*charactersToAppend.Count > PageSize.Width)
+            {
+                AppendNewLine();
+            }
+            foreach(var c in charactersToAppend)
+            {
+                Append(c);
             }
         }
         /// <summary>

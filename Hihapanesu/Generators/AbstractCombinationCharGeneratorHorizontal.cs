@@ -22,7 +22,7 @@ namespace Hihapanesu.Generators
 			this.position += new Geometry2D.Single.Point(distance, 0);
 			Geometry2D.Single.Point totalSize = this.position * this.Feed + this.Feed + 2 * this.Offset;
 			if (totalSize.X >= this.PageSize.Width)
-				this.position = new Geometry2D.Single.Point(0, this.position.Y + 1);
+                this.position = GetNewLine(this.position, 2);
 		}
 		public override void AppendWhitespace()
 		{
@@ -31,8 +31,13 @@ namespace Hihapanesu.Generators
 		}
 		public override void AppendNewLine()
 		{
-			this.position = new Geometry2D.Single.Point(0, this.position.Y + 1);
+            this.position = GetNewLine(this.position, 2);
 		}
+
+        public Geometry2D.Single.Point GetNewLine(Geometry2D.Single.Point position, int noOfLineBreaks)
+        {
+            return new Geometry2D.Single.Point(0, position.Y + noOfLineBreaks);
+        }
 	}
 }
 
