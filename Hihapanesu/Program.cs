@@ -14,8 +14,10 @@ namespace Hihapanesu
 		{
             IGenerator g;
             ITranscriber t;
+            bool useTest = false;
             if (args.Length > 0)
             {
+                var fileArgs = args.GetEnumerator();
                 if(args[0] == "-h")
                 {
                     g = new HihapanesuGenerator(); 
@@ -23,7 +25,7 @@ namespace Hihapanesu
                 }
                 else if(args[0] == "-e")
                 {
-                    g = new ElvishGenerator("symbols.svg", 12f, false); 
+                    g = new ElvishGenerator("symbols.svg", 12f, useTest); 
                     t = new ElvishTranscriber();
                 }
                 else
@@ -31,8 +33,13 @@ namespace Hihapanesu
                     return;
                 }
 
+                if(args[1] == "--test" || args[1] == "-t")
+                {
+                    useTest = true; 
+                    fileArgs.MoveNext();
+                }
+
                 //string[] fileArgs;
-                var fileArgs = args.GetEnumerator();
                 fileArgs.MoveNext();
                 Console.WriteLine(fileArgs.Current);
 

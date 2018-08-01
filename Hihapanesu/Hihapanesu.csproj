@@ -73,6 +73,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generators\AbstractCombinationCharGenerator.cs" />
+    <Compile Include="Generators\AbstractCombinationCharGeneratorHorizontal.cs" />
     <Compile Include="Generators\AbstractSingleCharHorizontalGenerator.cs" />
     <Compile Include="Generators\AbstractSingleCharGenerator.cs" />
     <Compile Include="Generators\AbstractGenerator.cs" />
@@ -81,6 +83,8 @@
     <Compile Include="Generators\AbstractVerticalGenerator.cs" />
     <Compile Include="Generators\HihapanesuGeneratorHorizontal.cs" />
     <Compile Include="Generators\HihapanesuGenerator.cs" />
+    <Compile Include="Helpers\ElvishCategorizer.cs" />
+    <Compile Include="Interfaces\ICategorizer.cs" />
     <Compile Include="Interfaces\IGenerator.cs" />
     <Compile Include="Interfaces\ITranscriber.cs" />
     <Compile Include="Program.cs" />
@@ -98,4 +102,5 @@
   <ItemGroup>
     <EmbeddedResource Include="symbols.svg" />
   </ItemGroup>
+  <ItemGroup />
 </Project>
