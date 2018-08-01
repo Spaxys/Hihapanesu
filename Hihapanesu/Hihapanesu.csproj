@@ -73,7 +73,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Generators\AbstractSvgCombinationCharGenerator.cs" />
     <Compile Include="Generators\AbstractCombinationCharGenerator.cs" />
+    <Compile Include="Generators\AbstractSvgCombinationCharGeneratorHorizontal.cs" />
     <Compile Include="Generators\AbstractCombinationCharGeneratorHorizontal.cs" />
     <Compile Include="Generators\AbstractSingleCharHorizontalGenerator.cs" />
     <Compile Include="Generators\AbstractSingleCharGenerator.cs" />

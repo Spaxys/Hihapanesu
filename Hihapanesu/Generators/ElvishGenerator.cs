@@ -8,7 +8,7 @@ using Hihapanesu.Interfaces;
 
 namespace Hihapanesu.Generators
 {
-	public class ElvishGenerator : AbstractCombinationCharGeneratorHorizontal, IGenerator
+	public class ElvishGenerator : AbstractSvgCombinationCharGeneratorHorizontal, IGenerator
     {
 
         public ElvishGenerator()
