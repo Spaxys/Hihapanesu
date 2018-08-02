@@ -105,6 +105,6 @@
     <EmbeddedResource Include="symbols.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="114-characters-symbols.svg" />
+    <EmbeddedResource Include="114-characters-symbols.svg" />
   </ItemGroup>
 </Project>
