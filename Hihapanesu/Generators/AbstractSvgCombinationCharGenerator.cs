@@ -13,7 +13,7 @@ namespace Hihapanesu.Generators
     public abstract class AbstractSvgCombinationCharGenerator : IGenerator
     {
         private ICategorizer categorizer;
-        protected string[] data = new string[19];
+        protected string[] data = new string[150];
 
         protected string this[string character]
         {
@@ -59,9 +59,9 @@ namespace Hihapanesu.Generators
             this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
             //this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
             this.Feed = new Geometry2D.Single.Size(charSize, charSize);
-            //foreach (Xml.Dom.Node node in symbols.Root)
-            //    if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
-            //        this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value[0]] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+            foreach (Xml.Dom.Node node in symbols.Root)
+                if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
+                    this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
             this.ResetPage();
         }
 
@@ -70,14 +70,16 @@ namespace Hihapanesu.Generators
             categorizer = new ElvishCategorizer();
             this.charSize = charSize;
             Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource(symbolsFileName);
+            //Added this next line just for debugging purposes
+            Xml.Dom.Document oldsymbols = Xml.Dom.Document.OpenResource("symbols.svg");
             this.Offset = new Geometry2D.Single.Size(2 * charSize, 2 *
                 charSize);
             this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);
             //this.Feed = new Geometry2D.Single.Size(symbols.Root.Attributes.Find(a => a.Name == "width").Value.Parse<float>(), symbols.Root.Attributes.Find(a => a.Name == "height").Value.Parse<float>());
             this.Feed = new Geometry2D.Single.Size(charSize * 2, charSize * 3);
-            //foreach (Xml.Dom.Node node in symbols.Root)
-            //    if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
-            //        this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value[0]] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+            foreach (Xml.Dom.Node node in symbols.Root)
+                if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
+                    this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
             this.Help = helpActive;
             this.ResetPage();
         }
@@ -218,76 +220,473 @@ namespace Hihapanesu.Generators
         };
 		protected int Address(string character)
 		{
-            int sum = 0;
-            foreach (var ch in character)
-            {
                 int c = 0;
-                switch (ch)
+                switch (character)
                 {
-                    case 'b':
+                    case "b":
                         c = 0;
                         break;
-                    case 'd':
+                    case "d":
                         c = 1;
                         break;
-                    case 'f':
+                    case "f":
                         c = 2;
                         break;
-                    case 'g':
+                    case "g":
                         c = 3;
                         break;
-                    case 'h':
+                    case "h":
                         c = 4;
                         break;
-                    case 'j':
+                    case "j":
                         c = 5;
                         break;
-                    case 'k':
+                    case "k":
                         c = 6;
                         break;
-                    case 'l':
+                    case "l":
                         c = 7;
                         break;
-                    case 'm':
+                    case "m":
                         c = 8;
                         break;
-                    case 'n':
+                    case "n":
                         c = 9;
                         break;
-                    case 'p':
+                    case "p":
                         c = 10;
                         break;
-                    case 'r':
+                    case "r":
                         c = 11;
                         break;
-                    case 's':
+                    case "s":
                         c = 12;
                         break;
-                    case 't':
+                    case "t":
                         c = 13;
                         break;
-                    case 'v':
+                    case "v":
                         c = 14;
                         break;
-                    case 'a':
+                    case "a":
+                        c = 15;
+                        break;
+                    case "e":
+                        c = 16;
+                        break;
+                    case "i":
+                        c = 17;
+                        break;
+                    case "o":
+                        c = 18;
+                        break;
+                    case "u":
+                        c = 19;
+                        break;
+
+                    //Combination characters
+
+                    //B:s
+                     case "ba":
+                        c = 20;
+                    break;
+                     case "be":
+                        c = 21;
+                        break;
+                     case "bi":
+                        c = 22;
+                        break;
+                     case "bo":
+                        c = 23;
+                        break;
+                     case "bu":
+                        c = 24;
+                        break;
+                     case "by":
+                        c = 25;
+                        break;
+
+                    //D:s
+                    case "da":
+                        c = 26;
+                        break;
+                    case "de":
+                        c = 27;
+                        break;
+                    case "di":
+                        c = 28;
+                        break;
+                    case "do":
+                        c = 29;
+                        break;
+                    case "du":
+                        c = 30;
+                        break;
+                    case "dy":
+                        c = 31;
+                        break;
+
+                    //F:s
+                    case "fa":
+                        c = 32;
+                        break;
+                    case "fe":
+                        c = 33;
+                        break;
+                    case "fi":
+                        c = 34;
+                        break;
+                    case "fo":
+                        c = 35;
+                        break;
+                    case "fu":
+                        c = 36;
+                        break;
+                    case "fy":
+                        c = 37;
+                        break;
+
+                    //G:s
+                    case "ga":
+                        c = 38;
+                        break;
+                    case "ge":
+                        c = 39;
+                        break;
+                    case "gi":
+                        c = 40;
+                        break;
+                    case "go":
+                        c = 41;
+                        break;
+                    case "gu":
+                        c = 42;
+                        break;
+                    case "gy":
+                        c = 43;
+                        break;
+
+                    //H:s
+                    case "ha":
+                        c = 44;
+                        break;
+                    case "he":
+                        c = 45;
+                        break;
+                    case "hi":
+                        c = 46;
+                        break;
+                    case "ho":
+                        c = 47;
+                        break;
+                    case "hu":
+                        c = 48;
+                        break;
+                    case "hy":
+                        c = 49;
+                        break;
+
+                    //J:s
+                    case "ja":
+                        c = 50;
+                    break;
+                    case "je":
+                        c = 51;
+                    break;
+                    case "ji":
+                        c = 52;
+                    break;
+                    case "jo":
+                        c = 53;
+                    break;
+                    case "ju":
+                        c = 54;
+                    break;
+                    case "jy":
+                        c = 55;
+                    break;
+
+                    //K:s
+                    case "ka":
+                        c = 56;
+                        break;
+                    case "ke":
+                        c = 57;
+                        break;
+                    case "ki":
+                        c = 58;
+                        break;
+                    case "ko":
+                        c = 59;
+                        break;
+                    case "ku":
+                        c = 60;
+                        break;
+                    case "ky":
+                        c = 61;
+                        break;
+
+                    //L:s
+                    case "la":
+                        c = 62;
+                        break;
+                    case "le":
+                        c = 63;
+                        break;
+                    case "li":
+                        c = 64;
+                        break;
+                    case "lo":
+                        c = 65;
+                        break;
+                    case "lu":
+                        c = 66;
+                        break;
+                    case "ly":
+                        c = 67;
+                        break;
+
+                    //M:s
+                    case "ma":
+                        c = 68;
+                        break;
+                    case "me":
+                        c = 69;
+                        break;
+                    case "mi":
+                        c = 70;
+                        break;
+                    case "mo":
+                        c = 71;
+                        break;
+                    case "mu":
+                        c = 72;
+                        break;
+                    case "my":
+                        c = 73;
+                        break;
+
+                    //N:s
+                    case "na":
+                        c = 74;
+                        break;
+                    case "ne":
+                        c = 75;
+                        break;
+                    case "ni":
+                        c = 76;
+                        break;
+                    case "no":
+                        c = 77;
+                        break;
+                    case "nu":
+                        c = 78;
+                        break;
+                    case "ny":
+                        c = 79;
+                        break;
+
+                    //P:s
+                    case "pa":
+                        c = 80;
+                        break;
+                    case "pe":
+                        c = 81;
+                        break;
+                    case "pi":
+                        c = 82;
+                        break;
+                    case "po":
+                        c = 83;
+                        break;
+                    case "pu":
+                        c = 84;
+                        break;
+                    case "py":
+                        c = 85;
+                        break;
+
+                    //R:s
+                    case "ra":
+                        c = 86;
+                        break;
+                    case "re":
+                        c = 87;
+                        break;
+                    case "ri":
+                        c = 88;
+                        break;
+                    case "ro":
+                        c = 89;
+                        break;
+                    case "ru":
+                        c = 90;
+                        break;
+                    case "ry":
+                        c = 91;
+                        break;
+
+                    //S:s
+                    case "sa":
+                        c = 92;
+                        break;
+                    case "se":
+                        c = 93;
+                        break;
+                    case "si":
+                        c = 94;
+                        break;
+                    case "so":
+                        c = 95;
+                        break;
+                    case "su":
+                        c = 96;
+                        break;
+                    case "sy":
+                        c = 97;
+                        break;
+
+                    //T:s
+                    case "ta":
+                        c = 98;
+                        break;
+                    case "te":
+                        c = 99;
+                        break;
+                    case "ti":
                         c = 100;
                         break;
-                    case 'e':
-                        c = 200;
+                    case "to":
+                        c = 101;
                         break;
-                    case 'i':
-                        c = 300;
+                    case "tu":
+                        c = 102;
                         break;
-                    case 'o':
-                        c = 400;
+                    case "ty":
+                        c = 103;
                         break;
-                    case 'u':
-                        c = 500;
-                        break;
-                }
-                sum += c;
+
+                    //V:s
+                    case "va":
+                        c = 104;
+                    break;
+                    case "ve":
+                        c = 105;
+                    break;
+                    case "vi":
+                        c = 106;
+                    break;
+                    case "vo":
+                        c = 107;
+                    break;
+                    case "vu":
+                        c = 108;
+                    break;
+                    case "vy":
+                        c = 109;
+                    break;
+
+                    //X:s
+                    case "xa":
+                        c = 110;
+                    break;
+                    case "xe":
+                        c = 111;
+                    break;
+                    case "xi":
+                        c = 112;
+                    break;
+                    case "xo":
+                        c = 113;
+                    break;
+                    case "xu":
+                        c = 114;
+                    break;
+                    case "xy":
+                        c = 115;
+                    break;
+
+                    //Z:s
+                    case "za":
+                        c = 116;
+                    break;
+                    case "ze":
+                        c = 117;
+                    break;
+                    case "zi":
+                        c = 118;
+                    break;
+                    case "zo":
+                        c = 119;
+                    break;
+                    case "zu":
+                        c = 120;
+                    break;
+                    case "zy":
+                        c = 121;
+                    break;
+
+                    //C:s
+                    case "ca":
+                        c = 122;
+                    break;
+                    case "ce":
+                        c = 123;
+                    break;
+                    case "ci":
+                        c = 124;
+                    break;
+                    case "co":
+                        c = 125;
+                    break;
+                    case "cu":
+                        c = 126;
+                    break;
+                    case "cy":
+                        c = 127;
+                    break;
+
+                    //Q:s
+                    case "qa":
+                        c = 128;
+                    break;
+                    case "qe":
+                        c = 129;
+                    break;
+                    case "qi":
+                        c = 130;
+                    break;
+                    case "qo":
+                        c = 131;
+                    break;
+                    case "qu":
+                        c = 132;
+                    break;
+                    case "qy":
+                        c = 133;
+                    break;
+
+                    //W:s
+                    case "wa":
+                        c = 134;
+                    break;
+                    case "we":
+                        c = 135;
+                    break;
+                    case "wi":
+                        c = 136;
+                    break;
+                    case "wo":
+                        c = 137;
+                    break;
+                    case "wu":
+                        c = 138;
+                    break;
+                    case "wy":
+                        c = 139;
+                    break;
             }
-			return sum;
+			return c;
 		}
 
         /// <summary>
@@ -301,26 +700,29 @@ namespace Hihapanesu.Generators
 
 
 			Geometry2D.Single.Point translate;
-            if (this.Help)
-            {
-                translate = this.position * this.Feed + this.Offset; 
-                //Adds a '(' character before the input string
-               this.root.Add(new Xml.Dom.Element("text",
-                                              new Xml.Dom.Text(new string( new char[] { '(' } )),
-                                              KeyValue.Create("style", "text-anchor: right; font-family: Times New Roman; font-size: "+ charSize +"mm"),
-                                              KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
-                                              ));
-                this.Move(0.2f);
-            }
 
             //Append all characters in the string vertically, starting from the bottom
-            var index = 0; 
+            var index = 0;
+            char[] printableChar;
+            if (this.Help)
+                printableChar = Address(character).ToString().ToCharArray();
+            else
+                printableChar = this[character].ToCharArray();
             translate = this.position * this.Feed + this.Offset;
-            this.root.Add(new Xml.Dom.Element("text",
-                                              new Xml.Dom.Text(new string(Address(character).ToString().ToCharArray())),
-                                              KeyValue.Create("style", "text-anchor: right; font-family: Times New Roman; font-size: " + charSize + "mm"),
-                                              KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
-                                              ));
+            if (!this.Help)
+                this.root.Add(new Xml.Dom.Element("path",
+                                                  KeyValue.Create("d", printableChar.ToString()),
+                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
+                )
+                );
+            else
+            {
+                this.root.Add(new Xml.Dom.Element("text",
+                                                  new Xml.Dom.Text(new string(printableChar)),
+                                                  KeyValue.Create("style", "text-anchor: right; font-family: Times New Roman; font-size: " + charSize + "mm"),
+                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
+                                                  ));
+            }
 
             if (this.Help)
                 //Adds a '.' character to visualize the space taken on the page
@@ -331,17 +733,6 @@ namespace Hihapanesu.Generators
 				                                  KeyValue.Create("transform", "translate(" + (translate.X + this.Feed.Width - 10).AsString() + ", " + (translate.Y + this.Feed.Height / 2).AsString() + ")")
 				)
 				);
-            if (this.Help)
-            {
-                translate = this.position * this.Feed + this.Offset; 
-                //Adds a ')' character before the input string
-                this.root.Add(new Xml.Dom.Element("text",
-                                              new Xml.Dom.Text(new string( new char[] { ')' } )),
-                                              KeyValue.Create("style", "text-anchor: right; font-family: Times New Roman; font-size: "+ charSize +"mm"),
-                                              KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
-                                              ));
-                this.Move(0.2f);
-            }
 			this.Move(1.0f);
 		}
 

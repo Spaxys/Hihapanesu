@@ -18,6 +18,11 @@ namespace Hihapanesu
             if (args.Length > 0)
             {
                 var fileArgs = args.GetEnumerator();
+                if(args[1] == "--test" || args[1] == "-t")
+                {
+                    useTest = true; 
+                    fileArgs.MoveNext();
+                }
                 if(args[0] == "-h")
                 {
                     g = new HihapanesuGenerator(); 
@@ -25,7 +30,7 @@ namespace Hihapanesu
                 }
                 else if(args[0] == "-e")
                 {
-                    g = new ElvishGenerator("symbols.svg", 12f, useTest); 
+                    g = new ElvishGenerator("114-characters-symbols.svg", 12f, useTest); 
                     t = new ElvishTranscriber();
                 }
                 else
@@ -33,11 +38,6 @@ namespace Hihapanesu
                     return;
                 }
 
-                if(args[1] == "--test" || args[1] == "-t")
-                {
-                    useTest = true; 
-                    fileArgs.MoveNext();
-                }
 
                 //string[] fileArgs;
                 fileArgs.MoveNext();
@@ -80,7 +80,7 @@ namespace Hihapanesu
                         switch(int.Parse(generationChoise))
                         {
                             default:
-                                g = new ElvishGenerator("symbols.svg", 12f, true);
+                                g = new ElvishGenerator("114-characters-symbols.svg", 12f, true);
                                 break;
                         }
                         break;
