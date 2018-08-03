@@ -102,9 +102,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="114-characters-symbols.svg" />
     <EmbeddedResource Include="symbols.svg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="114-characters-symbols.svg" />
+    <EmbeddedResource Include="hihapanesuSymbols.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="elvishSymbols.svg" />
   </ItemGroup>
 </Project>

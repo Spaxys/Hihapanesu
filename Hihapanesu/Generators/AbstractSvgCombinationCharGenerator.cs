@@ -14,6 +14,7 @@ namespace Hihapanesu.Generators
     {
         private ICategorizer categorizer;
         protected string[] data = new string[150];
+        protected Dictionary<string, string> newData = new Dictionary<string, string>();
 
         protected string this[string character]
         {
@@ -70,8 +71,6 @@ namespace Hihapanesu.Generators
             categorizer = new ElvishCategorizer();
             this.charSize = charSize;
             Xml.Dom.Document symbols = Xml.Dom.Document.OpenResource(symbolsFileName);
-            //Added this next line just for debugging purposes
-            Xml.Dom.Document oldsymbols = Xml.Dom.Document.OpenResource("symbols.svg");
             this.Offset = new Geometry2D.Single.Size(2 * charSize, 2 *
                 charSize);
             this.PageSize = new Geometry2D.Single.Size(744.09f, 1052.36f);

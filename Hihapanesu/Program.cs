@@ -25,12 +25,13 @@ namespace Hihapanesu
                 }
                 if(args[0] == "-h")
                 {
-                    g = new HihapanesuGenerator(); 
+                    g = new HihapanesuGenerator("hihapanesuSymbols.svg"); 
                     t = new HihapanesuTranscriber();
                 }
                 else if(args[0] == "-e")
                 {
-                    g = new ElvishGenerator("114-characters-symbols.svg", 12f, useTest); 
+                    //g = new ElvishGenerator("114-characters-symbols.svg", 12f, useTest);
+                    g = new ElvishGenerator("elvishSymbols.svg", 12f, useTest);
                     t = new ElvishTranscriber();
                 }
                 else
