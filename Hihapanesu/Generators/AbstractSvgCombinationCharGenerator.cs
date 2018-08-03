@@ -13,31 +13,24 @@ namespace Hihapanesu.Generators
     public abstract class AbstractSvgCombinationCharGenerator : IGenerator
     {
         private ICategorizer categorizer;
-        protected string[] data = new string[150];
-        protected Dictionary<string, string> newData = new Dictionary<string, string>();
+        //protected string[] data = new string[150];
+        protected Dictionary<string, string> data = new Dictionary<string, string>();
 
         protected string this[string character]
         {
             get
             {
-                int key = this.Address(character);
-                return this.data[key];
+                //int key = this.Address(character);
+                //return this.data[key];
+                return this.data[character];
             }
             set
             {
-                int key = this.Address(character);
-                this.data[key] = value;
+                //int key = this.Address(character);
+                //this.data[key] = value;
+                this.data[character] = value;
             }
         }
-
-        //protected string this [string key]
-        //{
-        //	get { return this[key]; }
-        //	set
-        //	{ 
-        //			this[key] = value;
-        //	}
-        //}
 
         public Geometry2D.Single.Size Feed { get; set; }
 
@@ -62,7 +55,9 @@ namespace Hihapanesu.Generators
             this.Feed = new Geometry2D.Single.Size(charSize, charSize);
             foreach (Xml.Dom.Node node in symbols.Root)
                 if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
-                    this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+                {
+                    data.Add((node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value, (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value);
+                }
             this.ResetPage();
         }
 
@@ -78,7 +73,9 @@ namespace Hihapanesu.Generators
             this.Feed = new Geometry2D.Single.Size(charSize * 2, charSize * 3);
             foreach (Xml.Dom.Node node in symbols.Root)
                 if (node is Xml.Dom.Element && (node as Xml.Dom.Element).Name == "path")
-                    this[(node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value] = (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value;
+                {
+                    data.Add((node as Xml.Dom.Element).Attributes.Find(a => a.Name == "id").Value, (node as Xml.Dom.Element).Attributes.Find(a => a.Name == "d").Value);
+                }
             this.Help = helpActive;
             this.ResetPage();
         }
@@ -702,27 +699,14 @@ namespace Hihapanesu.Generators
 
             //Append all characters in the string vertically, starting from the bottom
             var index = 0;
-            char[] printableChar;
-            if (this.Help)
-                printableChar = Address(character).ToString().ToCharArray();
-            else
-                printableChar = this[character].ToCharArray();
+            string printableChar = this[character];
             translate = this.position * this.Feed + this.Offset;
-            if (!this.Help)
-                this.root.Add(new Xml.Dom.Element("path",
-                                                  KeyValue.Create("d", printableChar.ToString()),
-                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
-                )
-                );
-            else
-            {
-                this.root.Add(new Xml.Dom.Element("text",
-                                                  new Xml.Dom.Text(new string(printableChar)),
-                                                  KeyValue.Create("style", "text-anchor: right; font-family: Times New Roman; font-size: " + charSize + "mm"),
-                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
-                                                  ));
-            }
-
+            
+            this.root.Add(new Xml.Dom.Element("path",
+                                              KeyValue.Create("d", printableChar),
+                                              KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
+            )
+            );
             if (this.Help)
                 //Adds a '.' character to visualize the space taken on the page
                 //Adds an xml child text element to the root element. Just for testing purposes I guess, free text of the transcribed text I guess
