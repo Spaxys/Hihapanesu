@@ -81,7 +81,7 @@ namespace Hihapanesu
                         switch(int.Parse(generationChoise))
                         {
                             default:
-                                g = new ElvishGenerator("114-characters-symbols.svg", 12f, true);
+                                g = new ElvishGenerator("elvishSymbols.svg", 12f, true);
                                 break;
                         }
                         break;
@@ -92,11 +92,11 @@ namespace Hihapanesu
                         switch(int.Parse(generationChoise))
                         {
                             case 1:
-                                g = new HihapanesuGeneratorHorizontal();
+                                g = new HihapanesuGeneratorHorizontal("hihapanesuSymbols.svg");
                                 break;
                             case 0:
                             default:
-                                g = new HihapanesuGenerator();
+                                g = new HihapanesuGenerator("hihapanesuSymbols.svg");
                                 break;
                         }
                         break;

@@ -699,14 +699,35 @@ namespace Hihapanesu.Generators
 
             //Append all characters in the string vertically, starting from the bottom
             var index = 0;
-            string printableChar = this[character];
+            var succeededGettingPrintableChar = false;
+            string printableChar = "";
+            try
+            {
+                printableChar = this[character];
+                succeededGettingPrintableChar = true;
+            }
+            catch
+            {}
             translate = this.position * this.Feed + this.Offset;
-            
-            this.root.Add(new Xml.Dom.Element("path",
-                                              KeyValue.Create("d", printableChar),
-                                              KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
+
+            if (succeededGettingPrintableChar)
+            {
+                this.root.Add(new Xml.Dom.Element("path",
+                                                  KeyValue.Create("d", printableChar),
+                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
             )
             );
+            }
+            else
+            {
+				this.root.Add(new Xml.Dom.Element("text", 
+				                                  new Xml.Dom.Text(new string(character.ToCharArray() )),
+				                                  KeyValue.Create("style", "text-anchor: right; font: Verdana 10pt"),
+                                                  KeyValue.Create("transform", "translate(" + translate.ToString() + ")")
+				)
+				);
+
+            }
             if (this.Help)
                 //Adds a '.' character to visualize the space taken on the page
                 //Adds an xml child text element to the root element. Just for testing purposes I guess, free text of the transcribed text I guess
