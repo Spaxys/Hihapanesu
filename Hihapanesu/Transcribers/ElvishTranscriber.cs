@@ -34,15 +34,18 @@ namespace Hihapanesu.Transcribers
                 //case 'z':
                 //    result = 's';
                 //    break;
+                case 'w':
+                    result = 'v';
+                    break;
                 case 'å':
                     result = 'a';
                     break;
                 case 'ä':
                     result = 'e';
                     break;
-                //case 'ö':
-                //    result = 'u';
-                //    break;
+                case 'ö':
+                    result = 'o';
+                    break;
                 default:
                     result = c;
                     break;
@@ -104,6 +107,7 @@ namespace Hihapanesu.Transcribers
 
         public string Transcribe(string input)
         {
+            input = input += " ";
             return this.Transcribe(input.ToCharArray()).Fold((c, s) => s + c, "");
         }
 
@@ -118,8 +122,13 @@ namespace Hihapanesu.Transcribers
                 yield break;
             bool done = false;
             char current = '\0';
+            bool firstChar = true;
             while (!done)
             {
+
+                if (lastCategory != LetterCategory.Whitespace)
+                    firstChar = false;
+
                 lastCharacter = current;
                 current = enumerator.Current;
 
@@ -131,20 +140,6 @@ namespace Hihapanesu.Transcribers
                 else if (current == enumerator.Current)
                     done = !enumerator.MoveNext();
 
-                //    //Map ck to k
-                //    else if (current == 'c' && enumerator.Current == 'k')
-                //    {
-                //        done = !enumerator.MoveNext();
-                //        current = 'k';
-                //    }
-
-                //    //Map ch to k if last character was a vowel,
-                //    //otherwise map ch to s
-                //    else if (current == 'c' && enumerator.Current == 'h')
-                //    {
-                //        done = !enumerator.MoveNext();
-                //        current = lastCategory == LetterCategory.Vowel ? 'k' : 's';
-                //    }
                 current = this.Map(current);
                 LetterCategory category = this.Categorize(current);
 
@@ -156,13 +151,14 @@ namespace Hihapanesu.Transcribers
                         if (current == '_')
                             yield return current;
                         break;
-                    //case LetterCategory.Vowel:
-                    //    //If vowel, and last category was not a consonant
-                    //    //add a h before the vowel
-                    //    //if (lastCategory != LetterCategory.Consonant)
-                    //    //    yield return 'h';
-                    //    //yield return current;
-                    //    break;
+                    case LetterCategory.Vowel:
+                        //If vowel, and last category was not a consonant
+                        //add a h before the vowel
+
+                        if (firstChar || lastCategory == LetterCategory.Vowel)
+                            yield return 'h';
+                        yield return current;
+                        break;
                     //case LetterCategory.Consonant:
                     //    //If consonant, and the last category was a consonant,
                     //    //add a u or i before the consonant
@@ -206,27 +202,18 @@ namespace Hihapanesu.Transcribers
                             }
                             yield return ' ';
                         }
+
+                        if (!firstChar)
+                            firstChar = true;
+
                         break;
                     default:
-
-                    //Map ö to oe
-                    if (current == 'ö')
-                    {
-                        yield return 'o';
-                        yield return 'e';
-                    }
-                    else if(current == 'd')
-                    {
-                        yield return 't';
-                        yield return 'h';
-                    }
-
-                    else
                         yield return current;
                     break;
                 }
                 if (category != LetterCategory.Other)
                     lastCategory = category;
+
             }
             //if (lastCategory == LetterCategory.Consonant)
             //        yield return (evenInsertVowel = !evenInsertVowel) ? 'u' : 'i';
