@@ -21,7 +21,7 @@ namespace Hihapanesu
                 var fileArgs = args.GetEnumerator();
                 if(args[1] == "--test" || args[1] == "-t")
                 {
-                    useAlfa = true; 
+                    useTest = true; 
                     fileArgs.MoveNext();
                 }
                

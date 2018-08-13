@@ -155,8 +155,8 @@ namespace Hihapanesu.Transcribers
                         //If vowel, and last category was not a consonant
                         //add a h before the vowel
 
-                        if (firstChar || lastCategory == LetterCategory.Vowel)
-                            yield return 'h';
+                        //if (firstChar || lastCategory == LetterCategory.Vowel)
+                        //    yield return 'h';
                         yield return current;
                         break;
                     //case LetterCategory.Consonant:
