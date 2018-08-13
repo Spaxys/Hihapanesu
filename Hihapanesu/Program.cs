@@ -15,14 +15,16 @@ namespace Hihapanesu
             IGenerator g;
             ITranscriber t;
             bool useTest = false;
+            bool useAlfa = true;
             if (args.Length > 0)
             {
                 var fileArgs = args.GetEnumerator();
                 if(args[1] == "--test" || args[1] == "-t")
                 {
-                    useTest = true; 
+                    useAlfa = true; 
                     fileArgs.MoveNext();
                 }
+               
                 if(args[0] == "-h")
                 {
                     g = new HihapanesuGenerator("hihapanesuSymbols.svg"); 

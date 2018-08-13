@@ -193,7 +193,7 @@ namespace Hihapanesu.Generators
             }
             //Add a newline if this word does not fit on this line
             var currentPosition = this.position * this.Feed + this.Offset; 
-            if(currentPosition.X + this.Feed.Width*charactersToAppend.Count > PageSize.Width)
+            if(currentPosition.X + this.Feed.Width*charactersToAppend.Count > PageSize.Width - 10)
             {
                 AppendNewLine();
             }
@@ -734,7 +734,7 @@ namespace Hihapanesu.Generators
 				this.root.Add(new Xml.Dom.Element("text", 
 				                                  new Xml.Dom.Text(new string(character.ToCharArray() )),
 				                                  KeyValue.Create("style", "text-anchor: right; font: Verdana 10pt"),
-				                                  KeyValue.Create("transform", "translate(" + (translate.X + this.Feed.Width - 10).AsString() + ", " + (translate.Y + this.Feed.Height / 2).AsString() + ")")
+				                                  KeyValue.Create("transform", "translate(" + (translate.X + this.Feed.Width - 10).AsString() + ", " + (translate.Y /*+ this.Feed.Height / 4*/).AsString() + ")")
 				)
 				);
 			this.Move(1.0f);

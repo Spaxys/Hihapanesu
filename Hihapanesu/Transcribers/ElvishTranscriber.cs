@@ -200,7 +200,10 @@ namespace Hihapanesu.Transcribers
                                     yield return 'r';
                                     break;
                             }
-                            yield return ' ';
+                            if (current == '\n' || current == '\r')
+                                yield return '_';
+                            else
+                                yield return ' ';
                         }
 
                         if (!firstChar)
