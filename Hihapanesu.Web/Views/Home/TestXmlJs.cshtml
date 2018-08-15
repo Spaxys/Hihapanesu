@@ -7,26 +7,52 @@
 @Scripts.Render("~/bundles/dweb")
 <script type="text/javascript">
     $(document).ready(function () {
+        var live = false;
+
+        //$(document).ajaxStart(function () {
+        //    console.log("Ajax starting!");
+        //    $("#loading").show();
+        //}).ajaxStop(function () {
+        //    console.log("Ajax finished!");
+        //    $("#loading").hide();
+        //});
+
         $("#btnSubmit").click(function () {
-            debugger;
             TranslateText();
             return true;
         }); 
 
-        $("#txtInput").keyup(function () {
+        $("#chkLive").click(function () {
             debugger;
-            TranslateText();
+            if (!live)
+                live = true;
+            else if (live)
+                live = false;
             return true;
         }); 
+
+            $("#txtInput").keyup(function () {
+                if (live) {
+                    TranslateText();
+                    return true;
+                }
+            });
     });    
     function TranslateText() {
-        debugger;
+        
+        console.log("Ajax starting!");
+        //$("#loading").show();
+        //$("#loading").setAttribute("hidden", "none");
+        $("#loading").innerHTML = "Loading...";
         //var inputText = $("#txtInput").val();
         var inputText = document.getElementById("txtInput").value;
             var output = HihapanesuTranslate(inputText);
             var outputElem = document.getElementById("output");
             outputElem.innerHTML = output;
-        debugger;
+        //$("#loading").hide();
+        //$("#loading").setAttribute("hidden", "hidden");
+        $("#loading").innerHTML = "";
+        console.log("Ajax finished!");
             //$("#output").val(output);
         return 0;
     };
@@ -42,11 +68,14 @@
     <div class="col-md-6">
         <div>
             <textarea id="txtInput" rows="30" cols="300" style="width:300px;"></textarea>
-            <a id="btnSubmit" class="btn">Skapa</a>
+            <span><label for="chkLive">Live översättning</label>
+            <input type="checkbox" id="chkLive" name="chkLive" /></span>
+            <span><a id="btnSubmit" class="btn btn-info">Skapa</a></span>
         </div>
     </div>
-    <div class="col-md-6" id="output">
-
+    <div class="col-md-6">
+        <div id="loading" style="display:none"><h1>Laddar...</h1></div>
+        <div id="output"></div>
     </div>
 </div>
 @*<script type="text/javascript" src="~/Scripts/TranslateScripts.js"></script>*@
