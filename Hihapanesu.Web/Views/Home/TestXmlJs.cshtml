@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "TestXmlJs";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/dweb")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnSubmit").click(function () {
+            debugger;
+            TranslateText();
+            return true;
+        }); 
+
+        $("#txtInput").keyup(function () {
+            debugger;
+            TranslateText();
+            return true;
+        }); 
+    });    
+    function TranslateText() {
+        debugger;
+        //var inputText = $("#txtInput").val();
+        var inputText = document.getElementById("txtInput").value;
+            var output = HihapanesuTranslate(inputText);
+            var outputElem = document.getElementById("output");
+            outputElem.innerHTML = output;
+        debugger;
+            //$("#output").val(output);
+        return 0;
+    };
+</script>
+@section Scripts
+{
+    
+    }
+
+<h2>TestXmlJs</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <textarea id="txtInput" rows="30" cols="300" style="width:300px;"></textarea>
+            <a id="btnSubmit" class="btn">Skapa</a>
+        </div>
+    </div>
+    <div class="col-md-6" id="output">
+
+    </div>
+</div>
+@*<script type="text/javascript" src="~/Scripts/TranslateScripts.js"></script>*@
+@*<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+
