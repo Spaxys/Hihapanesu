@@ -63,29 +63,32 @@
 
     function GetPrintPage() {
         debugger;
-        var url = $("#RedirectTo").val();
-        var svgData = encodeURI(document.getElementById("output").innerHTML);
+        //var url = $("#RedirectTo").val();
+        //var svgData = encodeURI(document.getElementById("output").innerHTML);
         //var svgData = document.getElementById("output").innerHTML;
+        //var encodedSvgData = htmlEscape(svgData);
         //var dataObject = { Data: svgData };
-        var dataObject = { Data: "hej" };
-        var dataJson = JSON.stringify(dataObject);
-        var response = $.ajax({
-            contentType: 'application/json',
-            data: dataJson,
-            type: 'POST',
-            url: url,
-            async: false,
-            success: function (result) {
-                debugger;
-                    location.href = url;
-            },
-            failure: function (data) {
-                debugger;
-                console.log(data);
-            }
+        //var dataObject = { Data: "hej" };
+        //var dataJson = JSON.stringify(dataObject);
+        //var response = $.ajax({
+        //    contentType: 'application/json',
+        //    data: dataJson,
+        //    type: 'POST',
+        //    url: url,
+        //    async: false,
+        //    success: function (result) {
+        //        debugger;
+        //            location.href = url;
+        //    },
+        //    failure: function (data) {
+        //        debugger;
+        //        console.log(data);
+        //    }
             
-        });
-        console.log(response.responseText);
+        //});
+        //console.log(response.responseText);
+        //window.open(encodedSvgData, "__new", "width=1000,height=1000");
+        PrintElem("output");
     }
 </script>
 @section Scripts
