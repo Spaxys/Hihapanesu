@@ -22,8 +22,12 @@
             return true;
         }); 
 
+        $("#btnPrint").click(function () {
+            GetPrintPage();
+            return true;
+        }); 
+
         $("#chkLive").click(function () {
-            debugger;
             if (!live)
                 live = true;
             else if (live)
@@ -56,6 +60,33 @@
             //$("#output").val(output);
         return 0;
     };
+
+    function GetPrintPage() {
+        debugger;
+        var url = $("#RedirectTo").val();
+        var svgData = encodeURI(document.getElementById("output").innerHTML);
+        //var svgData = document.getElementById("output").innerHTML;
+        //var dataObject = { Data: svgData };
+        var dataObject = { Data: "hej" };
+        var dataJson = JSON.stringify(dataObject);
+        var response = $.ajax({
+            contentType: 'application/json',
+            data: dataJson,
+            type: 'POST',
+            url: url,
+            async: false,
+            success: function (result) {
+                debugger;
+                    location.href = url;
+            },
+            failure: function (data) {
+                debugger;
+                console.log(data);
+            }
+            
+        });
+        console.log(response.responseText);
+    }
 </script>
 @section Scripts
 {
@@ -68,9 +99,13 @@
     <div class="col-md-6">
         <div>
             <textarea id="txtInput" rows="30" cols="300" style="width:300px;"></textarea>
-            <span><label for="chkLive">Live översättning</label>
-            <input type="checkbox" id="chkLive" name="chkLive" /></span>
+            <span>
+                <label for="chkLive">Live översättning</label>
+                <input type="checkbox" id="chkLive" name="chkLive" />
+            </span>
             <span><a id="btnSubmit" class="btn btn-info">Skapa</a></span>
+            <span><a id="btnPrint" class="btn btn-info">Skriv</a></span>
+            @Html.Hidden("RedirectTo", Url.Action("Print", "Print", new { Area = "PrintArea" }))
         </div>
     </div>
     <div class="col-md-6">

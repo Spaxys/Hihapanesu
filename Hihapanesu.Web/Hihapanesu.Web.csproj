@@ -207,6 +207,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\PrintArea\Controllers\PrintController.cs" />
+    <Compile Include="Areas\PrintArea\PrintAreaAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TranslateController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -215,6 +217,7 @@
     </Compile>
     <Compile Include="Interfaces\ITranslationService.cs" />
     <Compile Include="Models\RequestModels\TranscribeAndGenerateModel.cs" />
+    <Compile Include="Models\ViewModels\PrintVM.cs" />
     <Compile Include="Models\ViewModels\TestXmlVM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ElvishTranslationService.cs" />
@@ -250,6 +253,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Areas\PrintArea\Views\web.config" />
+    <Content Include="Areas\PrintArea\Views\Print\Print.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -276,6 +281,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\PrintArea\Models\" />
+    <Folder Include="Areas\PrintArea\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
